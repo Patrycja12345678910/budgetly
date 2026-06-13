@@ -1,4 +1,6 @@
 package com.example.budgetly.repository
 
-interface CategoryRepository {
-}
+import com.example.budgetly.entity.Category
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface CategoryRepository : JpaRepository<Category, Long>

@@ -9,13 +9,30 @@
 <h1>Wydatki</h1>
 
 <a href="/expenses/new">Dodaj wydatek</a>
-
 <br><br>
+
+<form method="get" action="/expenses">
+  <label>Filtruj po miesiącu:</label>
+  <input type="month" name="month" th:value="${selectedMonth}">
+  <button type="submit">Filtruj</button>
+  <a href="/expenses">Wyczyść</a>
+</form>
+
+<br>
+
+<h2>Podsumowanie</h2>
+<p>Suma wydatków: <span th:text="${totalPln}"></span> PLN</p>
+<p>Liczba wydatków: <span th:text="${#lists.size(expenses)}"></span></p>
+<p>
+  Największy wydatek:
+  <span th:if="${maxExpense != null}" th:text="${maxExpense.title + ' - ' + maxExpense.amountPln + ' PLN'}"></span>
+  <span th:if="${maxExpense == null}">brak</span>
+</p>
 
 <table border="1">
   <tr>
     <th>ID</th>
-    <th>Tytuł</th>
+    <th>Nazwa</th>
     <th>Kwota</th>
     <th>Waluta</th>
     <th>Kurs</th>
@@ -37,7 +54,6 @@
 </table>
 
 <br>
-
 <a href="/">Strona główna</a>
 
 </body>

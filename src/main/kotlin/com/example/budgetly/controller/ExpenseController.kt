@@ -1,15 +1,11 @@
 package com.example.budgetly.controller
 
-
 import com.example.budgetly.entity.Expense
 import com.example.budgetly.service.CategoryService
 import com.example.budgetly.service.ExpenseService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("/expenses")
@@ -19,8 +15,17 @@ class ExpenseController(
 ) {
 
     @GetMapping
-    fun list(model: Model): String {
-        model.addAttribute("expenses", expenseService.findAll())
+    fun list(
+        @RequestParam(required = false) month: String?,
+        model: Model
+    ): String {
+        val expenses = expenseService.findByMonth(month)
+
+        model.addAttribute("expenses", expenses)
+        model.addAttribute("selectedMonth", month)
+        model.addAttribute("totalPln", expenseService.totalPln(expenses))
+        model.addAttribute("maxExpense", expenseService.maxExpense(expenses))
+
         return "expenses/list"
     }
 

@@ -13,13 +13,12 @@ class CustomUserDetailsService(
 ) : UserDetailsService {
 
     override fun loadUserByUsername(email: String): UserDetails {
-        val user = userRepository.findByEmail(email)
+        val appUser = userRepository.findByEmail(email)
             ?: throw UsernameNotFoundException("Nie znaleziono użytkownika: $email")
 
-        return User.builder()
-            .username(user.email)
-            .password(user.password)
-            .roles(user.role)
+        return User.withUsername(appUser.email)
+            .password(appUser.password)
+            .authorities("ROLE_USER")
             .build()
     }
 }

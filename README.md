@@ -137,7 +137,7 @@ http://localhost:8080
 ---
 ## Wersja live
 
-[Otwórz aplikację Budgetly](https://budgetly-sbol.onrender.com)
+[Aplikacja Budgetly](https://budgetly-sbol.onrender.com)
 
 
 Do prezentacji aplikacji można wykorzystać konto demonstracyjne z przykładowymi danymi.

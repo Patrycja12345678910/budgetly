@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Dodaj wydatek</title>
 </head>
 <body>
-$END$
+
+<h1>Dodaj wydatek</h1>
+
+<form th:action="@{/expenses}" th:object="${expense}" method="post">
+
+    <label>Tytuł:</label>
+    <input type="text" th:field="*{title}" required>
+    <br><br>
+
+    <label>Kwota:</label>
+    <input type="number" step="0.01" th:field="*{amountOriginal}" required>
+    <br><br>
+
+    <label>Waluta:</label>
+    <select th:field="*{currency}">
+        <option value="PLN">PLN</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="CHF">CHF</option>
+    </select>
+    <br><br>
+
+    <label>Data:</label>
+    <input type="date" th:field="*{expenseDate}" required>
+    <br><br>
+
+    <label>Kategoria:</label>
+    <select th:field="*{category}">
+        <option th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category.name}">
+        </option>
+    </select>
+    <br><br>
+
+    <button type="submit">Zapisz</button>
+
+</form>
+
+<br>
+
+<a href="/expenses">Powrót</a>
+
 </body>
 </html>

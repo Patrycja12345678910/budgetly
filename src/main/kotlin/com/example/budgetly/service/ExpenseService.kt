@@ -1,14 +1,15 @@
 package com.example.budgetly.service
 
-
 import com.example.budgetly.entity.Expense
+import com.example.budgetly.integration.nbp.NbpClient
 import com.example.budgetly.repository.ExpenseRepository
 import org.springframework.stereotype.Service
-import java.math.BigDecimal
+import java.math.RoundingMode
 
 @Service
 class ExpenseService(
-    private val expenseRepository: ExpenseRepository
+    private val expenseRepository: ExpenseRepository,
+    private val nbpClient: NbpClient
 ) {
 
     fun findAll(): List<Expense> {
@@ -16,10 +17,12 @@ class ExpenseService(
     }
 
     fun save(expense: Expense): Expense {
-        if (expense.currency == "PLN") {
-            expense.exchangeRate = BigDecimal.ONE
-            expense.amountPln = expense.amountOriginal
-        }
+        val rate = nbpClient.getRate(expense.currency)
+
+        expense.exchangeRate = rate
+        expense.amountPln = expense.amountOriginal
+            .multiply(rate)
+            .setScale(2, RoundingMode.HALF_UP)
 
         return expenseRepository.save(expense)
     }

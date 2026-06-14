@@ -137,6 +137,16 @@ http://localhost:8080
 ---
 ## Wersja live
 
+[Otwórz aplikację Budgetly](https://budgetly-sbol.onrender.com)
+
+
+Do prezentacji aplikacji można wykorzystać konto demonstracyjne z przykładowymi danymi.
+
+Chociaż, w aktualnej wersji projektu wydatki są przechowywane globalnie w bazie danych, dlatego są widoczne dla wszystkich użytkowników po zalogowaniu.
+
+Login: test4@wp.pl
+
+Hasło: patrycja
 
 ---
 

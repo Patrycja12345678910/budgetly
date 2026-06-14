@@ -234,14 +234,15 @@ Projekt częściowo realizuje założenia Twelve-Factor App:
 
 Projekt wykorzystuje GitHub Actions do automatycznej weryfikacji kodu.
 
-Pipeline CI wykonuje następujące kroki:
+Po każdym pushu do repozytorium lub utworzeniu Pull Requesta uruchamiany jest pipeline CI, który:
 
-- pobranie kodu z repozytorium,
-- konfigurację środowiska Java,
-- uruchomienie testów przy użyciu Maven Wrapper,
-- przerwanie procesu w przypadku błędów testów.
+- pobiera kod z repozytorium,
+- konfiguruje środowisko Java 17,
+- uruchamia testy jednostkowe przy użyciu Maven Wrapper,
+- buduje obraz Docker na podstawie pliku Dockerfile,
+- przerywa proces w przypadku wykrycia błędów.
 
-Dzięki temu każda zmiana wypchnięta do repozytorium jest automatycznie sprawdzana.
+Dzięki temu każda zmiana jest automatycznie sprawdzana przed wdrożeniem aplikacji.
 
 ---
 

@@ -13,7 +13,15 @@ class CategoryService(
         return categoryRepository.findAll()
     }
 
+    fun findById(id: Long): Category {
+        return categoryRepository.findById(id).orElseThrow()
+    }
+
     fun save(category: Category): Category {
         return categoryRepository.save(category)
+    }
+
+    fun deleteById(id: Long) {
+        categoryRepository.deleteById(id)
     }
 }

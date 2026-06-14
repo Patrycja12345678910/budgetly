@@ -36,9 +36,25 @@ class ExpenseController(
         return "expenses/form"
     }
 
+    @GetMapping("/{id}/edit")
+    fun editForm(
+        @PathVariable id: Long,
+        model: Model
+    ): String {
+        model.addAttribute("expense", expenseService.findById(id))
+        model.addAttribute("categories", categoryService.findAll())
+        return "expenses/form"
+    }
+
     @PostMapping
     fun save(@ModelAttribute expense: Expense): String {
         expenseService.save(expense)
+        return "redirect:/expenses"
+    }
+
+    @PostMapping("/{id}/delete")
+    fun delete(@PathVariable id: Long): String {
+        expenseService.deleteById(id)
         return "redirect:/expenses"
     }
 }

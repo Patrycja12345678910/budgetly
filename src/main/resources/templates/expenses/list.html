@@ -79,6 +79,7 @@
       <th>Kwota PLN</th>
       <th>Data</th>
       <th>Kategoria</th>
+      <th>Akcje</th>
     </tr>
     </thead>
 
@@ -92,6 +93,20 @@
       <td th:text="${expense.amountPln}"></td>
       <td th:text="${expense.expenseDate}"></td>
       <td th:text="${expense.category != null ? expense.category.name : '-'}"></td>
+      <td>
+        <a class="btn btn-warning btn-sm"
+           th:href="@{/expenses/{id}/edit(id=${expense.id})}">
+          Edytuj
+        </a>
+
+        <form th:action="@{/expenses/{id}/delete(id=${expense.id})}"
+              method="post"
+              class="d-inline">
+          <button class="btn btn-danger btn-sm" type="submit">
+            Usuń
+          </button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

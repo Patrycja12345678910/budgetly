@@ -18,6 +18,10 @@ class ExpenseService(
         return expenseRepository.findAll()
     }
 
+    fun findById(id: Long): Expense {
+        return expenseRepository.findById(id).orElseThrow()
+    }
+
     fun findByMonth(month: String?): List<Expense> {
         if (month.isNullOrBlank()) {
             return findAll()
@@ -39,6 +43,10 @@ class ExpenseService(
             .setScale(2, RoundingMode.HALF_UP)
 
         return expenseRepository.save(expense)
+    }
+
+    fun deleteById(id: Long) {
+        expenseRepository.deleteById(id)
     }
 
     fun totalPln(expenses: List<Expense>): BigDecimal {

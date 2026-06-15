@@ -1,12 +1,19 @@
 package com.example.budgetly.service
 
 import com.example.budgetly.entity.Expense
+import com.example.budgetly.integration.nbp.NbpClient
+import com.example.budgetly.repository.ExpenseRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.mock
 import java.math.BigDecimal
 
 class ExpenseServiceTest {
+
+    private val expenseRepository: ExpenseRepository = mock()
+    private val nbpClient: NbpClient = mock()
+    private val expenseService = ExpenseService(expenseRepository, nbpClient)
 
     @Test
     fun shouldCalculateTotalPlnExpenses() {
@@ -15,9 +22,7 @@ class ExpenseServiceTest {
             Expense(title = "Coffee", amountPln = BigDecimal("15.50"))
         )
 
-        val result = expenses.fold(BigDecimal.ZERO) { sum, expense ->
-            sum + expense.amountPln
-        }
+        val result = expenseService.totalPln(expenses)
 
         assertEquals(BigDecimal("55.50"), result)
     }
@@ -28,7 +33,7 @@ class ExpenseServiceTest {
         val laptop = Expense(title = "Laptop", amountPln = BigDecimal("3000.00"))
         val coffee = Expense(title = "Coffee", amountPln = BigDecimal("15.50"))
 
-        val result = listOf(pizza, laptop, coffee).maxByOrNull { it.amountPln }
+        val result = expenseService.maxExpense(listOf(pizza, laptop, coffee))
 
         assertSame(laptop, result)
     }

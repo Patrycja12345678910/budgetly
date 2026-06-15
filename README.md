@@ -85,7 +85,6 @@ System umożliwia:
 
 ## Architektura systemu
 
-Wstaw tutaj diagram architektury.
 
 ![Diagram architektury](docs/model_danych1.png)
 
@@ -93,7 +92,6 @@ Wstaw tutaj diagram architektury.
 
 ## Model danych (ERD)
 
-Wstaw tutaj diagram ERD.
 
 ![Diagram ERD](docs/erd.png)
 
